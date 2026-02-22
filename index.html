@@ -1,53 +1,40 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#3367D6" />
-  <link rel="manifest" href="/pwa/manifest.json" />
-  <title>My PWA Example</title>
-  <link rel="stylesheet" href="/pwa/styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My PWA</title>
+
+  <!-- PWA Meta -->
+  <meta name="theme-color" content="#000000" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- Manifest -->
+  <link rel="manifest" href="manifest.json" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #111;
+      color: white;
+    }
+  </style>
 </head>
 <body>
-  <main>
-    <h1>My PWA Example</h1>
-    <button id="installBtn" hidden>Install app</button>
-  </main>
+  <h1>PWA Running Without Address Bar</h1>
 
-  <script src="/pwa/app.js"></script>
   <script>
-    // Register service worker
+    // Register Service Worker
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/pwa/sw.js').catch(err => console.error('SW register failed:', err));
+      navigator.serviceWorker.register('sw.js')
+        .then(() => console.log('Service Worker Registered'));
     }
-
-    // Install prompt handling
-    let deferredPrompt;
-    const installBtn = document.getElementById('installBtn');
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      // Prevent default mini-infobar on mobile
-      e.preventDefault();
-      deferredPrompt = e;
-      installBtn.hidden = false;
-    });
-
-    installBtn.addEventListener('click', async () => {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      const choice = await deferredPrompt.userChoice;
-      if (choice.outcome === 'accepted') {
-        console.log('User accepted install');
-      } else {
-        console.log('User dismissed install');
-      }
-      deferredPrompt = null;
-      installBtn.hidden = true;
-    });
-
-    // Optional: detect if app is already installed (to hide UI)
-    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-    if (isStandalone) installBtn.hidden = true;
   </script>
 </body>
 </html>
