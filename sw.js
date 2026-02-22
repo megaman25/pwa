@@ -1,6 +1,6 @@
 const CACHE_NAME = 'pwa-example-v1';
 const ASSETS = [
-  '/',
+  '/pwa/',
   '/pwa/index.html',
   '/pwa/styles.css',
   '/pwa/app.js',
