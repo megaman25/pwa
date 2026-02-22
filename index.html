@@ -18,7 +18,7 @@
   <script>
     // Register service worker
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').catch(err => console.error('SW register failed:', err));
+      navigator.serviceWorker.register('/pwa/sw.js').catch(err => console.error('SW register failed:', err));
     }
 
     // Install prompt handling
