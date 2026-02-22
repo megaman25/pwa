@@ -4,8 +4,6 @@ const ASSETS = [
   '/pwa/index.html',
   '/pwa/styles.css',
   '/pwa/app.js',
-  '/pwa/icons/icon-192.png',
-  '/pwa/icons/icon-512.png'
 ];
 
 self.addEventListener('install', event => {
